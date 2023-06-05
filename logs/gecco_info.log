@@ -1,0 +1,33 @@
+2023-06-05 22:50:13,314 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 22:50:13,315 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 22:50:13,318 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print
+2023-06-05 22:52:41,364 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 22:52:41,365 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 22:52:41,368 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print
+2023-06-05 23:04:54,090 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 23:04:54,090 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 23:04:54,095 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print
+2023-06-05 23:05:36,999 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 23:05:37,000 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 23:05:37,003 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print
+2023-06-05 23:05:57,865 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 23:05:57,866 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 23:05:57,869 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print
+2023-06-05 23:06:09,162 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 23:06:09,162 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 23:06:09,165 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print
+2023-06-05 23:06:36,354 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 23:06:36,354 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 23:06:36,358 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print
+2023-06-05 23:06:43,775 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 23:06:43,776 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 23:06:43,779 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print
+2023-06-05 23:06:53,729 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 23:06:53,730 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 23:06:53,734 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print
+2023-06-05 23:07:17,531 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 23:07:17,531 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 23:07:17,534 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print
+2023-06-05 23:08:26,976 - [INFO] - [MainThread] - (controller.py).start (21) - Gecco got a total of 0 tasks
+2023-06-05 23:08:26,976 - [INFO] - [MainThread] - (threads.py).run_threads (39) - starting 20 threads
+2023-06-05 23:08:26,980 - [INFO] - [MainThread] - (controller.py).start (26) - Scan completed,ready to print

@@ -1,0 +1,9 @@
+requests
+dnspython3
+netaddr
+numpy
+colorlog
+termcolor
+chardet
+PySocks
+faker
