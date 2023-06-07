@@ -193,23 +193,6 @@ def poll_process(process, suppress_errors=False):
             break
 
 
-def parse_target_url(url):
-    """
-    Parse target URL
-    """
-    ret = url
-
-    if conf.ipv6 and is_ipv6_address_format(url):
-        ret = "[" + ret + "]"
-
-    if not re.search("^http[s]*://", ret, re.I) and not re.search("^ws[s]*://", ret, re.I) and '://' not in ret:
-        if re.search(":443[/]*$", ret):
-            ret = "https://" + ret
-        else:
-            ret = "http://" + ret
-
-    return ret
-
 
 def is_url_format(value):
     if value and re.match(URL_ADDRESS_REGEX, value):
@@ -373,40 +356,6 @@ def get_file_items(filename, comment_prefix='#', unicode_=True, lowercase=False,
         raise GeccoSystemException(err_msg)
 
     return ret if not unique else ret.keys()
-
-
-def parse_target(address):
-    target = None
-    if is_domain_format(address) \
-            or is_url_format(address) \
-            or is_ip_address_with_port_format(address):
-        target = address
-
-    elif is_ipv6_url_format(address):
-        conf.ipv6 = True
-        target = address
-
-    elif is_ip_address_format(address):
-        try:
-            ip = ip_address(address)
-            target = ip.exploded
-        except ValueError:
-            pass
-    else:
-        if is_ipv6_address_format(address):
-            conf.ipv6 = True
-            try:
-                ip = ip_address(address)
-                target = ip.exploded
-            except ValueError:
-                try:
-                    network = ip_network(address, strict=False)
-                    for host in network.hosts():
-                        target = host.exploded
-                except ValueError:
-                    pass
-
-    return target
 
 
 def single_time_log_message(message, level=logging.INFO, flag=None):

@@ -1,4 +1,4 @@
-requests
+requests==2.28.2
 dnspython3
 netaddr
 numpy

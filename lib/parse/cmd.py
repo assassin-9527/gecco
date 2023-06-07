@@ -26,8 +26,10 @@ def cmd_line_parser(argv=None):
         parser.add_argument("--update", dest="update_all", action="store_true",
                             help="Update Gecco")
         
-        parser.add_argument("-d", "--domain", dest="domain", nargs='+',
-                            help="Target domain (e.g. \"www.site.com\")")
+        parser.add_argument("-d", "--domain", dest="domain", required=True, help="Target domain (e.g. \"www.site.com\")")
+        parser.add_argument("--proxy", dest="proxy", help="Use a proxy to connect to the target URL")
+        parser.add_argument("--proxy-cred", dest="proxy_cred", help="Proxy authentication credentials (name:password)")
+        parser.add_argument("--threads", dest="threads", type=int, default=1, help="Max number of concurrent network requests")
         
         args = parser.parse_args()
         

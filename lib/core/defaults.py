@@ -7,10 +7,12 @@ _defaults = {
     "proxy_cred": None,
     "proxies": {},
     "timeout": 30,
-    "threads": 20,
+    "threads": 1,
     "verbose": 1,
     "show_version": False,
-    "domain": ""
+    "domain": "",
+    "cookie": None,
+
 }
 
 defaults = AttribDict(_defaults)

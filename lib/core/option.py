@@ -49,19 +49,6 @@ def set_verbosity():
         logger.setLevel(CUSTOM_LOGGING.ERROR)
 
 
-def _set_http_user_agent():
-    '''
-    set user-agent
-    :return:
-    '''
-    if conf.agent:
-        conf.http_headers[HTTP_HEADER.USER_AGENT] = conf.agent
-
-
-def _set_http_referer():
-    if conf.referer:
-        conf.http_headers[HTTP_HEADER.REFERER] = conf.referer
-
 
 def _set_http_cookie():
     if conf.cookie:
@@ -71,23 +58,6 @@ def _set_http_cookie():
             conf.http_headers[HTTP_HEADER.COOKIE] = conf.cookie
 
 
-def _set_http_host():
-    if conf.host:
-        conf.http_headers[HTTP_HEADER.HOST] = conf.host
-
-
-def _set_http_extra_headers():
-    if conf.headers:
-        conf.headers = conf.headers.split("\n") if "\n" in conf.headers else conf.headers.split("\\n")
-        for header_value in conf.headers:
-            if not header_value.strip():
-                continue
-
-            if header_value.count(':') >= 1:
-                header, value = (_.lstrip() for _ in header_value.split(":", 1))
-                if header and value:
-                    if header not in conf.http_headers:
-                        conf.http_headers[header] = value
 
 
 def _set_network_timeout():
@@ -179,12 +149,6 @@ def _set_threads():
     if not isinstance(conf.threads, int) or conf.threads <= 0:
         conf.threads = 1
 
-def _cleanup_options():
-    """
-    Cleanup configuration attributes.
-    """
-    if conf.agent:
-        conf.agent = re.sub(r"[\r\n]", "", conf.agent)
 
 
 def _adjust_logging_formatter():
@@ -236,19 +200,14 @@ def _set_kb_attributes(flush_all=True):
 
     debug_msg = "initializing the knowledge base"
     logger.debug(debug_msg)
-
-    kb.abs_file_paths = set()
-    kb.os = None
-    kb.os_version = None
    
     kb.thread_continue = True
     kb.thread_exception = False
-
+    
     kb.data = AttribDict()
     kb.results = []
     kb.task_queue = Queue()
 
-    kb.comparison = None
 
 
 def _merge_options(input_options, override_options):
@@ -261,7 +220,6 @@ def _merge_options(input_options, override_options):
         input_options_items = input_options.__dict__.items()
     for key, value in input_options_items:
         if key not in conf or value not in (None, False) or override_options:
-            # logger.info('conf.%s=%s' % (key, value))
             conf[key] = value
 
     if input_options.get("configFile"):
@@ -274,7 +232,6 @@ def _merge_options(input_options, override_options):
 
 def init_options(input_options=AttribDict(), override_options=False):
     
-    # logger.info( input_options)
     cmd_line_options.update(input_options)
     _set_conf_attributes()
    
@@ -289,10 +246,6 @@ def init_options(input_options=AttribDict(), override_options=False):
 def init_network_conf():
     if any((conf.domain)):
         _set_http_cookie()
-        _set_http_host()
-        _set_http_referer()
-        _set_http_user_agent()
-        _set_http_extra_headers()
 
     _set_network_proxy()
     _set_network_timeout()
@@ -305,7 +258,6 @@ def init():
     """
     set_verbosity()
     _adjust_logging_formatter()
-    _cleanup_options()
     _create_directory()
 
     _set_threads()

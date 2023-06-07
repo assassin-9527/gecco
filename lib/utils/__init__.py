@@ -2,6 +2,7 @@ import re
 import ast
 import string
 import random
+from faker import Faker
 from socket import gethostbyname
 import urllib.parse
 from lib.core.data import logger

@@ -38,7 +38,6 @@ def check_environment():
 
 
 
-
 def main():
     try:
         check_environment()
