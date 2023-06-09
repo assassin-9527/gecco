@@ -50,9 +50,15 @@ def subdomain_step():
     # 子域名爆破阶段
     try:
         logger.info("开始进行子域名爆破...")
-        sbd = SubDomain(domain_list=kb.domain_list)
+        sbd = SubDomain(domain_list=[kb.domain])
         sbd.start_brute()
-        
+    finally:
+        pass
+
+def domain_Resolution_step():
+    # 域名解析阶段
+    try:
+        logger.info("开始进行域名解析...")
     finally:
         pass
 

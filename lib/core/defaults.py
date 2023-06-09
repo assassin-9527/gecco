@@ -7,7 +7,7 @@ _defaults = {
     "proxy_cred": None,
     "proxies": {},
     "timeout": 30,
-    "threads": 20,
+    "threads": 50,
     "verbose": 1,
     "show_version": False,
     "domain": "",
