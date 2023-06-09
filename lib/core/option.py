@@ -172,6 +172,7 @@ def _create_directory():
     if not os.path.isdir(paths.GECCO_OUTPUT_PATH):
         try:
             os.makedirs(paths.GECCO_OUTPUT_PATH)
+            os.makedirs(paths.GECCO_TEMP_PATH)
         except FileExistsError:
             pass
 
@@ -203,10 +204,12 @@ def _set_kb_attributes(flush_all=True):
    
     kb.thread_continue = True
     kb.thread_exception = False
-    
-    kb.data = AttribDict()
-    kb.results = []
+    kb.domain_list = []
+    kb.sub_domain_list = []
     kb.task_queue = Queue()
+    # kb.data = AttribDict()
+    # kb.results = []
+    
 
 
 

@@ -1,6 +1,6 @@
 from lib.core.data import conf
 from lib.core.enums import HTTP_HEADER
-from lib.utils import generate_random_user_agent
+from lib.utils import generate_random_user_agent, urlparse
 from requests.models import Request
 from requests.sessions import Session
 from requests.sessions import merge_cookies
@@ -35,15 +35,23 @@ def session_request(self, method, url,
         return merged_setting
 
     # Create the Request.
+    if conf.get('http_headers', {}) == {}:
+        conf.http_headers = {}
+
     merged_cookies = merge_cookies(merge_cookies(RequestsCookieJar(), self.cookies),
-                                   cookies or (conf.cookie if 'cookie' in conf else None))
-    if not conf.agent and HTTP_HEADER.USER_AGENT not in conf.http_headers:
+                                   cookies or conf.get('cookie', None))
+    if not conf.get('agent', '') and HTTP_HEADER.USER_AGENT not in conf.get('http_headers', {}):
         conf.http_headers[HTTP_HEADER.USER_AGENT] = generate_random_user_agent()
+
+    # Fix no connection adapters were found
+    pr = urlparse(url)
+    if pr.scheme.lower() not in ['http', 'https']:
+        url = pr._replace(scheme='https' if str(pr.port).endswith('443') else 'http').geturl()
 
     req = Request(
         method=method.upper(),
         url=url,
-        headers=_merge_retain_none(headers, conf.http_headers if 'http_headers' in conf else {}),
+        headers=_merge_retain_none(headers, conf.get('http_headers', {})),
         files=files,
         data=data or {},
         json=json,
@@ -53,15 +61,15 @@ def session_request(self, method, url,
         hooks=hooks,
     )
     prep = self.prepare_request(req)
-    # proxies = proxies or (conf.proxies if 'proxies' in conf else {})
+
     if proxies is None:
-        proxies = conf.proxies if 'proxies' in conf else {}
+        proxies = conf.get('proxies', {})
 
     settings = self.merge_environment_settings(
         prep.url, proxies, stream, verify, cert
     )
 
-    timeout = timeout or conf.get("timeout", None)
+    timeout = timeout or conf.get("timeout", 10)
     if timeout:
         timeout = float(timeout)
 
@@ -72,6 +80,7 @@ def session_request(self, method, url,
     }
     send_kwargs.update(settings)
     resp = self.send(prep, **send_kwargs)
+
     if resp.encoding == 'ISO-8859-1':
         encodings = get_encodings_from_content(resp.text)
         if encodings:

@@ -169,6 +169,7 @@ def patched_parse_url(url):
     # simplified for our needs and less annoying.
     # Additionally, this implementations does silly things to be optimal
     # on CPython.
+
     if not url:
         # Empty
         return Url()

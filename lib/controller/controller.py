@@ -2,10 +2,11 @@ import copy
 from lib.core.data import conf
 from lib.core.data import kb
 from lib.core.data import logger
-from lib.core.exception import GeccoValidationException, GeccoSystemException
+from lib.core.exception import GeccoValidationException, GeccoSystemException, GeccoBaseException
 from lib.core.threads import run_threads
 from lib.core.common import get_domain, is_domain_format, is_url_format
-from lib.modules.domain_collection import icp_search, whois_search
+from lib.modules.domain_collection import DomainCollection
+from lib.modules.subdomain import SubDomain
 
 
 def runtime_check():
@@ -28,50 +29,32 @@ def runtime_check():
 
 
 def start():
-    runtime_check()
-    info_msg = "Gecco got a domain {0}".format(kb.domain)
-    logger.info(info_msg)
-    logger.debug("Gecco will open {} threads".format(conf.threads))
-    company_name = icp_search(kb.domain)
-    company_name = whois_search(kb.domain)
-    logger.info(company_name)
+    try:
+        runtime_check()
+        logger.info("输入域名 => {0}".format(kb.domain))
+        logger.debug("最大允许使用的线程数: {} ".format(conf.threads))
+        domain_search_step()
+        subdomain_step()
+    except GeccoBaseException as ex:
+        logger.error(ex)
 
+def domain_search_step():
+    # 域名收集阶段
+    try:
+        dc = DomainCollection(kb.domain)
+        dc.search()
+    finally:
+        pass
 
-
-    # try:
-    #     run_threads(conf.threads, task_run)
-    #     logger.info("Scan completed,ready to print")
-    # finally:
-    #     task_done()
-
-
-
-def show_task_result():
-
-
-    if not kb.results:
-        return
-
-
-
-def task_run():
-    while not kb.task_queue.empty() and kb.thread_continue:
-       
-
-        try:
-            pass
-        except GeccoValidationException as ex:
-            info_msg = "GeccoValidationException"
-            logger.error(info_msg)
-            result = None
-
-
+def subdomain_step():
+    # 子域名爆破阶段
+    try:
+        logger.info("开始进行子域名爆破...")
+        sbd = SubDomain(domain_list=kb.domain_list)
+        sbd.start_brute()
         
+    finally:
+        pass
 
 
 
-
-
-
-def task_done():
-    show_task_result()

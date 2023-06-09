@@ -38,8 +38,10 @@ def check_environment():
 
 
 
+import datetime
 def main():
     try:
+        starttime = datetime.datetime.now()
         check_environment()
         set_paths(module_path())
         banner()
@@ -52,6 +54,7 @@ def main():
             start()
         except threading.ThreadError:
             raise
+        
     except GeccoUserQuitException:
         pass
 
@@ -76,7 +79,9 @@ def main():
         raise SystemExit
 
     finally:
-        data_to_stdout("\n[*] shutting down at {0}\n\n".format(time.strftime("%X")))
+        endtime = datetime.datetime.now()
+        runtime = (endtime - starttime).seconds
+        data_to_stdout("\n[*] shutting down at {0}, runtime: {1}\n\n".format(time.strftime("%X"), runtime))
 
 
 if __name__ == "__main__":
